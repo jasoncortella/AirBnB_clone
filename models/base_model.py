@@ -7,11 +7,25 @@ from datetime import datetime
 class BaseModel:
     """ defines common attributes and methods for inheriting classes """
 
-    def __init__(self):
-        """ initialize an instance """
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+    def __init__(self, *args, **kwargs):
+        """ initialize an instance potentially with a dictionary argument"""
+
+        if "id" in kwargs:
+            self.id = kwargs["id"]
+        else:
+            self.id = str(uuid.uuid4())
+
+        if "created_at" in kwargs:
+            x = kwargs["created_at"]
+            self.created_at = datetime.strptime(x, "%Y-%m-%dT%H:%M:%S.%f")
+        else:
+            self.created_at = datetime.now()
+
+        if "updated_at" in kwargs:
+            x = kwargs["updated_at"]
+            self.updated_at = datetime.strptime(x, "%Y-%m-%dT%H:%M:%S.%f")
+        else:
+            self.updated_at = datetime.now()
 
     def __str__(self):
         """ overwrite string special method """
