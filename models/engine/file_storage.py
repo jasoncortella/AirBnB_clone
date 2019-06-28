@@ -15,12 +15,12 @@ class FileStorage:
         """ sets obj with id value """
         className = type(obj).__name__
         key = className + '.' + str(obj.id)
-        self.__objects[key] = obj.to_dict()
+        self.__objects[key] = obj
 
     def save(self):
         """ serializes object """
         with open(self.__file_path, 'w') as myFile:
-            json.dump(self.__objects, myFile)
+            json.dump({k:v.to_dict() for k,v in self.__objects.items()}, myFile)
 
     def reload(self):
         """ deserializes a json file """
