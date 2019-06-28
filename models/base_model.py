@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 import uuid
 from datetime import datetime
+from models import storage
+
 """ baseModel """
 
 
@@ -26,6 +28,8 @@ class BaseModel:
             self.updated_at = datetime.strptime(x, "%Y-%m-%dT%H:%M:%S.%f")
         else:
             self.updated_at = datetime.now()
+        if not kwargs or len(kwargs) == 0:
+            storage.new(self)
 
     def __str__(self):
         """ overwrite string special method """
@@ -35,6 +39,7 @@ class BaseModel:
     def save(self):
         """ update updated_at with current time """
         self.updated_at = datetime.now()
+        storage.save()
 
     def to_dict(self):
         """ return a dict with a key/values of __dict__ of the instance """
@@ -43,3 +48,4 @@ class BaseModel:
         new_dict['updated_at'] = self.updated_at.isoformat()
         new_dict['created_at'] = self.created_at.isoformat()
         return new_dict
+
