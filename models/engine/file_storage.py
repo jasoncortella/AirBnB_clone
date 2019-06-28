@@ -1,10 +1,11 @@
 #!/usr/bin/python3
 import json
 from os import path
+from models.base_model import BaseModel
 
 class FileStorage:
 
-    __file_path = '/home/vagrant/AirBnB_clone/file.json'
+    __file_path = 'file.json'
     __objects = {}
 
     def all(self):
@@ -24,6 +25,12 @@ class FileStorage:
 
     def reload(self):
         """ deserializes a json file """
-        if path.exists(self.__file_path):
-            with open(self.__file_path) as myFile:
-                return json.load(myFile)
+        try:
+            with open('file.json') as myFile:
+                f = json.load(myFile)
+            for k,v in f.items():
+                self.__objects[k] = BaseModel(**v)
+        except:
+            pass
+
+

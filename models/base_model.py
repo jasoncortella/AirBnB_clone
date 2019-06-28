@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import uuid
 from datetime import datetime
-from models import storage
+import models
 
 """ baseModel """
 
@@ -11,7 +11,10 @@ class BaseModel:
 
     def __init__(self, *args, **kwargs):
         """ initialize an instance potentially with a dictionary argument"""
-
+        if "name" in kwargs:
+            self.name = kwargs["name"]
+        if "my_number" in kwargs:
+            self.my_number = kwargs["my_number"]
         if "id" in kwargs:
             self.id = kwargs["id"]
         else:
@@ -22,14 +25,13 @@ class BaseModel:
             self.created_at = datetime.strptime(x, "%Y-%m-%dT%H:%M:%S.%f")
         else:
             self.created_at = datetime.now()
-
         if "updated_at" in kwargs:
-            x = kwargs["updated_at"]
-            self.updated_at = datetime.strptime(x, "%Y-%m-%dT%H:%M:%S.%f")
+             x = kwargs["updated_at"]
+             self.updated_at = datetime.strptime(x, "%Y-%m-%dT%H:%M:%S.%f")
         else:
             self.updated_at = datetime.now()
         if not kwargs or len(kwargs) == 0:
-            storage.new(self)
+                models.storage.new(self)
 
     def __str__(self):
         """ overwrite string special method """
@@ -39,7 +41,7 @@ class BaseModel:
     def save(self):
         """ update updated_at with current time """
         self.updated_at = datetime.now()
-        storage.save()
+        models.storage.save()
 
     def to_dict(self):
         """ return a dict with a key/values of __dict__ of the instance """
