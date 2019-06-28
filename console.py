@@ -4,6 +4,7 @@ from models.base_model import BaseModel
 from models import storage
 from shlex import split
 
+
 class HBNBCommand(cmd.Cmd):
     """ console """
 
@@ -12,8 +13,8 @@ class HBNBCommand(cmd.Cmd):
                  "User": BaseModel,
                  "State": BaseModel,
                  "City": BaseModel,
-                 "Amenity": BaseModel, # Placeholders, replace once classes
-                 "Place": BaseModel,   # are all created
+                 "Amenity": BaseModel,  # Placeholders, replace once classes
+                 "Place": BaseModel,    # are all created
                  "Review": BaseModel}
 
     def do_quit(self, arg):
@@ -51,21 +52,21 @@ class HBNBCommand(cmd.Cmd):
         elif len(arglist) == 1:
             print("** instance id missing **")
         elif ("{}.{}".format(arglist[0], arglist[1]) not in storage.all()):
-              print("** no instance found **")
+            print("** no instance found **")
         else:
-              print(storage.all()["{}.{}".format(arglist[0], arglist[1])])
+            print(storage.all()["{}.{}".format(arglist[0], arglist[1])])
 
     def do_destroy(self, arg):
         """destroy command to exit the program"""
-        return True #PLACEHOLDER
+        return True  # PLACEHOLDER
 
     def do_all(self, *args):
         """all command to exit the program"""
-        return True #PLACEHOLDER
+        return True  # PLACEHOLDER
 
     def do_update(self, *args):
         """update command to exit the program"""
-        return True #PLACEHOLDER
+        return True  # PLACEHOLDER
 
 
 if __name__ == '__main__':

@@ -25,8 +25,8 @@ class BaseModel:
         else:
             self.created_at = datetime.now()
         if "updated_at" in kwargs:
-             x = kwargs["updated_at"]
-             self.updated_at = datetime.strptime(x, "%Y-%m-%dT%H:%M:%S.%f")
+            x = kwargs["updated_at"]
+            self.updated_at = datetime.strptime(x, "%Y-%m-%dT%H:%M:%S.%f")
         else:
             self.updated_at = datetime.now()
 
@@ -50,4 +50,3 @@ class BaseModel:
         new_dict['updated_at'] = self.updated_at.isoformat()
         new_dict['created_at'] = self.created_at.isoformat()
         return new_dict
-
