@@ -42,7 +42,7 @@ class HBNBCommand(cmd.Cmd):
     def do_show(self, arg):
         """
         Example usage - "show BaseModel 121212"
-        show command to exit the program
+        show command to print the str representation of an instance
         """
         arglist = split(arg)
         if len(arglist) == 0:
@@ -57,8 +57,22 @@ class HBNBCommand(cmd.Cmd):
             print(storage.all()["{}.{}".format(arglist[0], arglist[1])])
 
     def do_destroy(self, arg):
-        """destroy command to exit the program"""
-        return True  # PLACEHOLDER
+        """
+        Example usage - "destroy BaseModel 121212"
+        destroy command to delete an instance based on class name and id
+        """
+        arglist = split(arg)
+        if len(arglist) == 0:
+            print("** class name missing **")
+        elif arglist[0] not in HBNBCommand.__classes:
+            print("** class doesn't exist **")
+        elif len(arglist) == 1:
+            print("** instance id missing **")
+        elif ("{}.{}".format(arglist[0], arglist[1]) not in storage.all()):
+            print("** no instance found **")
+        else:
+            del storage.all()["{}.{}".format(arglist[0], arglist[1])]
+            storage.save()
 
     def do_all(self, *args):
         """all command to exit the program"""
