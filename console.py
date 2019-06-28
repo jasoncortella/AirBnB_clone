@@ -75,8 +75,17 @@ class HBNBCommand(cmd.Cmd):
             storage.save()
 
     def do_all(self, *args):
-        """all command to exit the program"""
-        return True  # PLACEHOLDER
+        """
+        Example usage 1 - "all"
+        Example usage 2 - "all BaseModel"
+        all command to print all string representations of instances
+            - Can decide whether or not to choose a single class
+        """
+        arglist = split(arg)
+        if len(arglist) and arglist[0] not in HBNBCommand.__classes:
+            print("** class doesn't exist **")
+        else:
+            pass  # Placeholder
 
     def do_update(self, *args):
         """update command to exit the program"""
