@@ -19,7 +19,6 @@ class BaseModel:
             self.id = kwargs["id"]
         else:
             self.id = str(uuid.uuid4())
-
         if "created_at" in kwargs:
             x = kwargs["created_at"]
             self.created_at = datetime.strptime(x, "%Y-%m-%dT%H:%M:%S.%f")
@@ -30,6 +29,7 @@ class BaseModel:
              self.updated_at = datetime.strptime(x, "%Y-%m-%dT%H:%M:%S.%f")
         else:
             self.updated_at = datetime.now()
+
         if not kwargs or len(kwargs) == 0:
                 models.storage.new(self)
 
