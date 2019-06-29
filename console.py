@@ -74,7 +74,7 @@ class HBNBCommand(cmd.Cmd):
             del storage.all()["{}.{}".format(arglist[0], arglist[1])]
             storage.save()
 
-    def do_all(self, *args):
+    def do_all(self, arg):
         """
         Example usage 1 - "all"
         Example usage 2 - "all BaseModel"
@@ -85,7 +85,13 @@ class HBNBCommand(cmd.Cmd):
         if len(arglist) and arglist[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
         else:
-            pass  # Placeholder
+            plist = []
+            for obj in storage.all().values():
+                if len(arglist) == 0:
+                    plist.append(obj.__str__())
+                elif argl[0] == obj.__class__.__name__:
+                    plist.append(obj.__str__())
+            print(plist)
 
     def do_update(self, *args):
         """update command to exit the program"""
