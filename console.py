@@ -93,10 +93,28 @@ class HBNBCommand(cmd.Cmd):
                     plist.append(obj.__str__())
             print(plist)
 
-    def do_update(self, *args):
-        """update command to exit the program"""
-        return True  # PLACEHOLDER
-
+    def do_update(self, arg):
+        """
+        Example usage - update BaseModel 1234 email "aibnb@holbertonschool.com"
+        Usage: update <class name> <id> <attribute name> "<attribute value>"
+        update command to update an instance based on the class name
+        and id by adding or updating attribute
+        """
+        arglist = split(arg)
+        if len(arglist) == 0:
+            print("** class name missing **")
+        elif arglist[0] not in HBNBCommand.__classes:
+            print("** class doesn't exist **")
+        elif len(arglist) == 1:
+            print("** instance id missing **")
+        elif ("{}.{}".format(arglist[0], arglist[1]) not in storage.all()):
+            print("** no instance found **")
+        elif len(arglist) == 2:
+            print("** attribute name missing **")
+        elif len(arglist) == 3:
+            print("** value missing **")
+        else:
+            pass  # Placeholder
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
