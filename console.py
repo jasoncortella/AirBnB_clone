@@ -114,7 +114,9 @@ class HBNBCommand(cmd.Cmd):
         elif len(arglist) == 3:
             print("** value missing **")
         else:
-            pass  # Placeholder
+            ins_id = "{}.{}".format(arglist[0], arglist[1])
+            setattr(storage.all()[ins_id], arglist[2], arglist[3])
+            storage.all()[ins_id].save()
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
