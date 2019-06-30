@@ -11,27 +11,23 @@ class BaseModel:
 
     def __init__(self, *args, **kwargs):
         """ initialize an instance potentially with a dictionary argument"""
-        if "name" in kwargs:
-            self.name = kwargs["name"]
-        if "my_number" in kwargs:
-            self.my_number = kwargs["my_number"]
-        if "id" in kwargs:
-            self.id = kwargs["id"]
-        else:
+        if kwargs and len(kwargs) > 0:
+            for k, v in kwargs.items():
+                if k == "created_at" or k == "updated_at":
+                    setattr(self, k, datetime.strptime
+                            (v, "%Y-%m-%dT%H:%M:%S.%f"))
+                elif k == "__class__":
+                    pass
+                else:
+                    setattr(self, k, v)
+        if "id" not in kwargs:
             self.id = str(uuid.uuid4())
-        if "created_at" in kwargs:
-            x = kwargs["created_at"]
-            self.created_at = datetime.strptime(x, "%Y-%m-%dT%H:%M:%S.%f")
-        else:
+        if "created_at" not in kwargs:
             self.created_at = datetime.now()
-        if "updated_at" in kwargs:
-            x = kwargs["updated_at"]
-            self.updated_at = datetime.strptime(x, "%Y-%m-%dT%H:%M:%S.%f")
-        else:
+        if "updated_at" not in kwargs:
             self.updated_at = datetime.now()
-
         if not kwargs or len(kwargs) == 0:
-                models.storage.new(self)
+            models.storage.new(self)
 
     def __str__(self):
         """ overwrite string special method """
