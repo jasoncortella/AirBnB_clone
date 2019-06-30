@@ -10,7 +10,7 @@ class HBNBCommand(cmd.Cmd):
 
     prompt = '(hbnb) '
     __classes = {"BaseModel": BaseModel,
-                 "User": BaseModel,
+                 "User": User,
                  "State": BaseModel,
                  "City": BaseModel,
                  "Amenity": BaseModel,  # Placeholders, replace once classes
@@ -89,7 +89,7 @@ class HBNBCommand(cmd.Cmd):
             for obj in storage.all().values():
                 if len(arglist) == 0:
                     plist.append(obj.__str__())
-                elif argl[0] == obj.__class__.__name__:
+                elif arglist[0] == obj.__class__.__name__:
                     plist.append(obj.__str__())
             print(plist)
 

@@ -2,6 +2,7 @@
 import json
 from os import path
 from models.base_model import BaseModel
+from models.user import User
 
 
 class FileStorage:
@@ -31,6 +32,9 @@ class FileStorage:
             with open('file.json') as myFile:
                 f = json.load(myFile)
             for k, v in f.items():
-                self.__objects[k] = BaseModel(**v)
+                if "BaseModel" in k:
+                    self.__objects[k] = BaseModel(**v)
+                elif "User" in k:
+                    self.__objects[k] = User(**v)
         except:
             pass
