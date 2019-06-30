@@ -3,6 +3,11 @@ import json
 from os import path
 from models.base_model import BaseModel
 from models.user import User
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
 
 
 class FileStorage:
@@ -36,5 +41,15 @@ class FileStorage:
                     self.__objects[k] = BaseModel(**v)
                 elif "User" in k:
                     self.__objects[k] = User(**v)
+                elif "Place" in k:
+                    self.__objects[k] = Place(**v)
+                elif "State" in k:
+                    self.__objects[k] = State(**v)
+                elif "City" in k:
+                    self.__objects[k] = City(**v)
+                elif "Amenity" in k:
+                    self.__objects[k] = Amenity(**v)
+                elif "Review" in k:
+                    self.__objects[k] = Review(**v)
         except:
             pass
