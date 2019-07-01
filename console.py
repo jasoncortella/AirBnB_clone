@@ -36,7 +36,7 @@ class HBNBCommand(cmd.Cmd):
         Example usage - "create BaseModel"
         create a new class instance, saves it to JSON,  and print its id
         """
-        if len(arg) == 0:
+        if not arg:
             print("** class name missing **")
         elif arg not in HBNBCommand.__classes:
             print("** class doesn't exist **")
@@ -51,16 +51,18 @@ class HBNBCommand(cmd.Cmd):
         show command to print the str representation of an instance
         """
         arglist = split(arg)
-        if len(arglist) == 0:
+        if len(arglist) > 1:
+            iid = "{}.{}".format(arglist[0], arglist[1]) #  (iid - instance id)
+        if not arg:
             print("** class name missing **")
         elif arglist[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
         elif len(arglist) == 1:
             print("** instance id missing **")
-        elif ("{}.{}".format(arglist[0], arglist[1]) not in storage.all()):
+        elif iid not in storage.all():
             print("** no instance found **")
         else:
-            print(storage.all()["{}.{}".format(arglist[0], arglist[1])])
+            print(storage.all()[iid])
 
     def do_destroy(self, arg):
         """
@@ -68,16 +70,18 @@ class HBNBCommand(cmd.Cmd):
         destroy command to delete an instance based on class name and id
         """
         arglist = split(arg)
-        if len(arglist) == 0:
+        if len(arglist) > 1:
+            iid = "{}.{}".format(arglist[0], arglist[1])
+        if not arg:
             print("** class name missing **")
         elif arglist[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
         elif len(arglist) == 1:
             print("** instance id missing **")
-        elif ("{}.{}".format(arglist[0], arglist[1]) not in storage.all()):
+        elif iid not in storage.all():
             print("** no instance found **")
         else:
-            del storage.all()["{}.{}".format(arglist[0], arglist[1])]
+            del storage.all()[iid]
             storage.save()
 
     def do_all(self, arg):
@@ -107,22 +111,23 @@ class HBNBCommand(cmd.Cmd):
         and id by adding or updating attribute
         """
         arglist = split(arg)
-        if len(arglist) == 0:
+        if len(arglist) > 1:
+            iid = "{}.{}".format(arglist[0], arglist[1])
+        if not arg:
             print("** class name missing **")
         elif arglist[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
         elif len(arglist) == 1:
             print("** instance id missing **")
-        elif ("{}.{}".format(arglist[0], arglist[1]) not in storage.all()):
+        elif iid not in storage.all():
             print("** no instance found **")
         elif len(arglist) == 2:
             print("** attribute name missing **")
         elif len(arglist) == 3:
             print("** value missing **")
         else:
-            ins_id = "{}.{}".format(arglist[0], arglist[1])
-            setattr(storage.all()[ins_id], arglist[2], arglist[3])
-            storage.all()[ins_id].save()
+            setattr(storage.all()[iid], arglist[2], arglist[3])
+            storage.all()[iid].save()
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()

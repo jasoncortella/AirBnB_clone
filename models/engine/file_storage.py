@@ -21,9 +21,8 @@ class FileStorage:
 
     def new(self, obj):
         """ sets obj with id value """
-        className = type(obj).__name__
-        key = className + '.' + str(obj.id)
-        self.__objects[key] = obj
+        iid = "{}.{}".format(type(obj).__name__, str(obj.id))
+        self.__objects[iid] = obj
 
     def save(self):
         """ serializes object """
