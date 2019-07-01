@@ -9,6 +9,7 @@ from models.place import Place
 from models.review import Review
 from models import storage
 from shlex import split
+import re
 
 
 class HBNBCommand(cmd.Cmd):
@@ -134,12 +135,30 @@ class HBNBCommand(cmd.Cmd):
         for k in self.__classes:
             if arg == (k + '.all()'):
                 self.do_all(k)
-            if arg == (k + '.count()'):
+            elif arg == (k + '.count()'):
                 count = 0
                 for key in storage.all():
                     if k in key:
                         count += 1
                 print(count)
+            elif arg.startswith(k + ".show(") and arg.endswith(")"):
+                x = re.search('"(.+?)"', arg)
+                if x:
+                    iid = x.group(1)
+                self.do_show(k + " " + iid)
+            elif arg.startswith(k + ".destroy(") and arg.endswith(")"):
+                x = re.search('"(.+?)"', arg)
+                if x:
+                    iid = x.group(1)
+                self.do_destroy(k + " " + iid)
+            elif arg.startswith(k + ".update(") and arg.endswith(")"):
+                start = arg.find('(')
+                end = arg.find(')')
+                x = arg[start:end]
+                x = x.replace(',', '')
+                al = split(x[1:])
+                testdict = dict(al[1])
+                self.do_update('{} {} {} "{}"'.format(k, al[0], al[1], al[2]))
 
 
 if __name__ == '__main__':
