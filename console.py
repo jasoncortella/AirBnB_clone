@@ -52,7 +52,7 @@ class HBNBCommand(cmd.Cmd):
         """
         arglist = split(arg)
         if len(arglist) > 1:
-            iid = "{}.{}".format(arglist[0], arglist[1]) #  (iid - instance id)
+            iid = "{}.{}".format(arglist[0], arglist[1])
         if not arg:
             print("** class name missing **")
         elif arglist[0] not in HBNBCommand.__classes:
@@ -128,6 +128,19 @@ class HBNBCommand(cmd.Cmd):
         else:
             setattr(storage.all()[iid], arglist[2], arglist[3])
             storage.all()[iid].save()
+
+    def default(self, arg):
+        """ default methods """
+        for k in self.__classes:
+            if arg == (k + '.all()'):
+                self.do_all(k)
+            if arg == (k + '.count()'):
+                count = 0
+                for key in storage.all():
+                    if k in key:
+                        count += 1
+                print(count)
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
