@@ -84,6 +84,27 @@ class test_base_model_created_at_updated_at(unittest.TestCase):
         a = BaseModel()
         self.assertIsInstance(a.created_at, datetime)
 
+    def test_caua_instantiation_created_at_correct_time(self):
+        a = datetime.now()
+        b = BaseModel()
+        c = datetime.now()
+        self.assertGreater(b.created_at, a)
+        self.assertLess(b.created_at, c)
+
+    def test_caua_instantiation_upeated_at_correct_time(self):
+        a = datetime.now()
+        b = BaseModel()
+        c = datetime.now()
+        self.assertGreater(b.updated_at, a)
+        self.assertLess(b.updated_at, c)
+
+    def test_caua_save_id(self):
+        b = BaseModel()
+        c = datetime.now()
+        b.save()
+        self.assertGreater(b.updated_at, c)
+        self.assertLess(b.created_at, c)
+
     def test_updated_at_instantiation(self):
         a = BaseModel()
         self.assertIsInstance(a.updated_at, datetime)
@@ -118,6 +139,62 @@ class test_base_model_str_method(unittest.TestCase):
         b= "[{}] ({}) {}".format(a.__class__.__name__, a.id, a.__dict__)
         self.assertEqual(str(a), b)
 
+class test_base_model_to_dict_method(unittest.TestCase):
+    """ define unittest for testing the __str__ method """
+
+    def test_to_dict_created_at(self):
+        a = BaseModel()
+        self.assertTrue("created_at" in a.to_dict())
+
+    def test_to_dict_class(self):
+        a = BaseModel()
+        self.assertTrue("__class__" in a.to_dict())
+
+    def test_to_dict_id(self):
+        a = BaseModel()
+        self.assertTrue("id" in a.to_dict())
+
+    def test_to_dict_updated_at(self):
+        a = BaseModel()
+        self.assertTrue("updated_at" in a.to_dict())
+
+    def test_to_dict_kwarg(self):
+        a = BaseModel(hello="world")
+        self.assertTrue("hello" in a.to_dict())
+
+    def test_to_dict_type(self):
+        a = BaseModel()
+        self.assertIsInstance(a.to_dict(), dict)
+
+    def test_to_dict_class_value(self):
+        a = BaseModel()
+        value = a.to_dict()['__class__']
+        self.assertEqual(value, a.__class__.__name__)
+
+    def test_to_dict_created_at_type(self):
+        a = BaseModel()
+        value = a.to_dict()['created_at']
+        self.assertEqual(type(value), str)
+
+    def test_to_dict_updated_at_type(self):
+        a = BaseModel()
+        value = a.to_dict()['updated_at']
+        self.assertEqual(type(value), str)
+
+    def test_to_dict_class_created_at_string(self):
+        a = BaseModel()
+        v = a.to_dict()['created_at']
+        self.assertEqual(v, a.created_at.isoformat())
+
+    def test_to_dict_class_updated_at_string(self):
+        a = BaseModel()
+        v = a.to_dict()['updated_at']
+        self.assertEqual(v, a.updated_at.isoformat())
+
+    def test_to_dict_id_match(self):
+        a = BaseModel()
+        value = a.to_dict()['id']
+        self.assertEqual(a.id, value)
 
 
 if __name__ == '__main__':
