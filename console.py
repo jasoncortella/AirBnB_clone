@@ -14,7 +14,7 @@ from shlex import split
 class HBNBCommand(cmd.Cmd):
     """ console """
 
-    prompt = '(hbnb) '
+    prompt = '(Hi Josef!) '
     __classes = {"BaseModel": BaseModel,
                  "User": User,
                  "State": State,
