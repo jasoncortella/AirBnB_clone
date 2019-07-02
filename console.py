@@ -32,6 +32,10 @@ class HBNBCommand(cmd.Cmd):
         """EOF command to exit the program"""
         return True
 
+    def emptyline(self):
+        """ do nothing for an empty line """
+        pass
+
     def do_create(self, arg):
         """
         Example usage - "create BaseModel"
