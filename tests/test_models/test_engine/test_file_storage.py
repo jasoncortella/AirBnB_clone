@@ -56,7 +56,7 @@ class test_file_storage_methods(unittest.TestCase):
         a = FileStorage()
         self.assertEqual(a.all(), a.__dict__)
 
-    def test_new(self):
+    def test_file_storage_new(self):
         a = BaseModel()
         b = User()
         c = City()
@@ -71,6 +71,64 @@ class test_file_storage_methods(unittest.TestCase):
         FileStorage().new(e)
         FileStorage().new(f)
         FileStorage().new(g)
+        aid = "BaseModel." + a.id
+        bid = "User." + b.id
+        cid = "City." + c.id
+        did = "State." + d.id
+        eid = "Amenity." + e.id
+        fid = "Place." + f.id
+        gid = "Review." + g.id
+        self.assertIn(aid, FileStorage._FileStorage__objects)
+        self.assertIn(bid, FileStorage._FileStorage__objects)
+        self.assertIn(cid, FileStorage._FileStorage__objects)
+        self.assertIn(did, FileStorage._FileStorage__objects)
+        self.assertIn(eid, FileStorage._FileStorage__objects)
+        self.assertIn(fid, FileStorage._FileStorage__objects)
+        self.assertIn(gid, FileStorage._FileStorage__objects)
+
+    def test_file_storage_save(self):
+        a = BaseModel()
+        b = User()
+        c = City()
+        d = State()
+        e = Amenity()
+        f = Place()
+        g = Review()
+        FileStorage().save()
+        aid = "BaseModel." + a.id
+        bid = "User." + b.id
+        cid = "City." + c.id
+        did = "State." + d.id
+        eid = "Amenity." + e.id
+        fid = "Place." + f.id
+        gid = "Review." + g.id
+        with open("file.json", "r") as myFile:
+             self.assertIn(aid, myFile.read())
+        with open("file.json", "r") as myFile:
+             self.assertIn(bid, myFile.read())
+        with open("file.json", "r") as myFile:
+             self.assertIn(cid, myFile.read())
+        with open("file.json", "r") as myFile:
+             self.assertIn(did, myFile.read())
+        with open("file.json", "r") as myFile:
+             self.assertIn(eid, myFile.read())
+        with open("file.json", "r") as myFile:
+             self.assertIn(fid, myFile.read())
+        with open("file.json", "r") as myFile:
+             self.assertIn(gid, myFile.read())
+
+
+    def test_file_storage_reload(self):
+        a = BaseModel()
+        b = User()
+        c = City()
+        d = State()
+        e = Amenity()
+        f = Place()
+        g = Review()
+        FileStorage().save()
+        FileStorage._FileStorage__objects = {}
+        FileStorage().reload()
         aid = "BaseModel." + a.id
         bid = "User." + b.id
         cid = "City." + c.id
