@@ -232,6 +232,7 @@ class test_base_model_save_method(unittest.TestCase):
     def setUp(self):
         os.rename("file.json", "temp.json")
 
+
     def tearDown(self):
         os.rename("temp.json", "file.json")
 
