@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """ unittest for amenity class """
 
-
 import unittest
 from models.base_model import BaseModel
 from models.amenity import Amenity
@@ -9,6 +8,7 @@ from datetime import datetime
 from time import sleep
 import models
 import os
+
 
 class test_amenity_instantiation(unittest.TestCase):
     """ define unittest for testing the instance attribute """
