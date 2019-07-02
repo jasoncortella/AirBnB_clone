@@ -1,9 +1,9 @@
 #!/usr/bin/python3
-""" City """
+""" Define city subclass that inherits from BaseModel """
 from models.base_model import BaseModel
 
 
 class City(BaseModel):
-    """ City class """
+    """ Define city subclass that inherits from BaseModel """
     state_id = ""
     name = ""
