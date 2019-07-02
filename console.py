@@ -161,7 +161,6 @@ class HBNBCommand(cmd.Cmd):
                 x = arg[start:end]
                 x = x.replace(',', '')
                 al = split(x[1:])
-                testdict = dict(al[1])
                 self.do_update('{} {} {} "{}"'.format(k, al[0], al[1], al[2]))
 
 
