@@ -26,6 +26,7 @@ class test_base_model_instantiation(unittest.TestCase):
 
     def test_base_model_args_unused_with_kwargs(self):
         a = BaseModel("argument", id="hello")
+        self.assertNotIn("argument", a.__dict__.values())
         self.assertEqual(a.id, "hello")
 
     def test_base_model_change_id(self):
@@ -43,7 +44,7 @@ class test_base_model_instantiation(unittest.TestCase):
         a.updated_at = 10
         self.assertEqual(a.updated_at, 10)
 
-    def test_instance_is_in_objects(self):
+    def test_base_model_instance_is_in_objects(self):
         a = BaseModel()
         self.assertIn(a, models.storage.all().values())
 
