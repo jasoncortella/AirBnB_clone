@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """ unittest for file_storage class """
 
-
 import unittest
 from models.base_model import BaseModel
 from models.user import User
@@ -15,6 +14,7 @@ from datetime import datetime
 from time import sleep
 import models
 import os
+
 
 class test_file_storage_instantiation(unittest.TestCase):
     """ define unit test for testing file storage instantiation tests """
@@ -36,6 +36,7 @@ class test_file_storage_instantiation(unittest.TestCase):
         a = FileStorage()
         with self.assertRaises(AttributeError):
             a.objects
+
 
 class test_file_storage_methods(unittest.TestCase):
     """ define unit test for testing file storage all method """
@@ -84,7 +85,6 @@ class test_file_storage_methods(unittest.TestCase):
         self.assertIn(eid, FileStorage._FileStorage__objects)
         self.assertIn(fid, FileStorage._FileStorage__objects)
         self.assertIn(gid, FileStorage._FileStorage__objects)
-
 
 
 if __name__ == '__main__':
