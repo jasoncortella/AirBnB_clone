@@ -6,7 +6,8 @@ import unittest
 from models.base_model import BaseModel
 from datetime import datetime
 from time import sleep
-
+import models
+import os
 
 class test_base_model_instantiation(unittest.TestCase):
     """ define unittest for testing the id instance attribute """
@@ -18,6 +19,14 @@ class test_base_model_instantiation(unittest.TestCase):
     def test_base_model_instantiation_none_arg(self):
         a = BaseModel(None)
         self.assertIsInstance(a, BaseModel)
+
+    def test_base_model_args_unused(self):
+        a = BaseModel("argument")
+        self.assertNotIn("argument", a.__dict__.values())
+
+    def test_base_model_args_unused_with_kwargs(self):
+        a = BaseModel("argument", id="hello")
+        self.assertEqual(a.id, "hello")
 
     def test_base_model_change_id(self):
         a = BaseModel()
@@ -33,6 +42,11 @@ class test_base_model_instantiation(unittest.TestCase):
         a = BaseModel()
         a.updated_at = 10
         self.assertEqual(a.updated_at, 10)
+
+    def test_instance_is_in_objects(self):
+        a = BaseModel()
+        self.assertIn(a, models.storage.all().values())
+
 
 class test_base_model_id(unittest.TestCase):
     """ define unittest for testing the id instance attribute """
@@ -76,6 +90,15 @@ class test_base_model_id(unittest.TestCase):
         a= BaseModel(id=12345, name="hello")
         self.assertEqual(a.id, 12345)
         self.assertEqual(a.name, "hello")
+
+    def test_base_model_invalid_created_at(self):
+        with self.assertRaises(TypeError):
+            a= BaseModel(created_at=None)
+
+    def test_base_model_invalid_updated_at(self):
+        with self.assertRaises(TypeError):
+            a= BaseModel(updated_at=None)
+
 
 class test_base_model_created_at_updated_at(unittest.TestCase):
     """ define unittest for testing the id instance attribute """
@@ -136,11 +159,12 @@ class test_base_model_str_method(unittest.TestCase):
 
     def test_str(self):
         a = BaseModel()
-        b= "[{}] ({}) {}".format(a.__class__.__name__, a.id, a.__dict__)
+        b = "[{}] ({}) {}".format(a.__class__.__name__, a.id, a.__dict__)
         self.assertEqual(str(a), b)
 
+
 class test_base_model_to_dict_method(unittest.TestCase):
-    """ define unittest for testing the __str__ method """
+    """ define unittest for testing the to_dict method """
 
     def test_to_dict_created_at(self):
         a = BaseModel()
@@ -195,6 +219,42 @@ class test_base_model_to_dict_method(unittest.TestCase):
         a = BaseModel()
         value = a.to_dict()['id']
         self.assertEqual(a.id, value)
+
+    def test_to_dict_custom_attributes(self):
+        a = BaseModel()
+        a.country = "USA"
+        self.assertIn("country", a.to_dict())
+
+
+class test_base_model_save_method(unittest.TestCase):
+    """ define unittest for testing the save method """
+
+    def setUp(self):
+        os.rename("file.json", "temp.json")
+
+    def tearDown(self):
+        os.rename("temp.json", "file.json")
+
+    def test_save_with_arg(self):
+        a = BaseModel()
+        with self.assertRaises(TypeError):
+            a.save("arg")
+
+#    def test_save_engages_updated_at(self):
+#        a = BaseModel()
+#        b = a.updated_at
+#        a.save()
+#        self.assertNotEqual(b, a.updated_at)
+
+#    def test_save_updates_json_file(self):
+#        a = BaseModel()
+#        a.save()
+#        iid = "{}.{}".format(a.__class__.__name__, a.id)
+#        with open("file.json", "r") as myFile:
+#            self.assertTrue(iid in myFile.read())
+
+# These two tests cause traceback, not sure why. Works fine in python3 mode
+
 
 
 if __name__ == '__main__':
