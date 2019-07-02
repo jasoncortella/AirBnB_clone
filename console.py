@@ -15,7 +15,7 @@ import re
 class HBNBCommand(cmd.Cmd):
     """ console """
 
-    prompt = '(Hi Josef!) '
+    prompt = '(hbnb) '
     __classes = {"BaseModel": BaseModel,
                  "User": User,
                  "State": State,
