@@ -37,12 +37,54 @@ class test_file_storage_instantiation(unittest.TestCase):
         with self.assertRaises(AttributeError):
             a.objects
 
-class test_file_storage_all_method(unittest.TestCase):
+class test_file_storage_methods(unittest.TestCase):
     """ define unit test for testing file storage all method """
+
+    def setUp(self):
+        FileStorage._FileStorage__objects = {}
+        os.rename("file.json", "temp.json")
+
+    def tearDown(self):
+        os.rename("temp.json", "file.json")
 
     def test_all_return_type(self):
         a = FileStorage()
         self.assertIsInstance(a.all(), dict)
+
+    def test_all_dictionary_object(self):
+        a = FileStorage()
+        self.assertEqual(a.all(), a.__dict__)
+
+    def test_new(self):
+        a = BaseModel()
+        b = User()
+        c = City()
+        d = State()
+        e = Amenity()
+        f = Place()
+        g = Review()
+        FileStorage().new(a)
+        FileStorage().new(b)
+        FileStorage().new(c)
+        FileStorage().new(d)
+        FileStorage().new(e)
+        FileStorage().new(f)
+        FileStorage().new(g)
+        aid = "BaseModel." + a.id
+        bid = "User." + b.id
+        cid = "City." + c.id
+        did = "State." + d.id
+        eid = "Amenity." + e.id
+        fid = "Place." + f.id
+        gid = "Review." + g.id
+        self.assertIn(aid, FileStorage._FileStorage__objects)
+        self.assertIn(bid, FileStorage._FileStorage__objects)
+        self.assertIn(cid, FileStorage._FileStorage__objects)
+        self.assertIn(did, FileStorage._FileStorage__objects)
+        self.assertIn(eid, FileStorage._FileStorage__objects)
+        self.assertIn(fid, FileStorage._FileStorage__objects)
+        self.assertIn(gid, FileStorage._FileStorage__objects)
+
 
 
 if __name__ == '__main__':
