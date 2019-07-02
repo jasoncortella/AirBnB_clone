@@ -13,7 +13,7 @@ import re
 
 
 class HBNBCommand(cmd.Cmd):
-    """ Class to define console behavior"""
+    """ Class to define console behavior """
 
     prompt = '(hbnb) '
     __classes = {"BaseModel": BaseModel,
