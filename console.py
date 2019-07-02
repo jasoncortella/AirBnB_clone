@@ -13,7 +13,7 @@ import re
 
 
 class HBNBCommand(cmd.Cmd):
-    """ console """
+    """ Class to define console behavior"""
 
     prompt = '(hbnb) '
     __classes = {"BaseModel": BaseModel,
@@ -135,7 +135,11 @@ class HBNBCommand(cmd.Cmd):
             storage.all()[iid].save()
 
     def default(self, arg):
-        """ default methods """
+        """
+        Example usage 1 - <class name>.all()
+        Example usage 2 - <class name>.count()
+        method to define default behavior when "do" command syntax not used
+        """
         for k in self.__classes:
             if arg == (k + '.all()'):
                 self.do_all(k)

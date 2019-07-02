@@ -1,10 +1,10 @@
 #!/usr/bin/python3
-""" Place """
+""" Define place subclass that inherits from BaseModel """
 from models.base_model import BaseModel
 
 
 class Place(BaseModel):
-    """ Place class """
+    """ Define place subclass that inherits from BaseModel """
     city_id = ""
     user_id = ""
     name = ""

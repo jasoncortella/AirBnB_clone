@@ -1,8 +1,8 @@
 #!/usr/bin/python3
-""" Amenity """
+""" Define amenity subclass that inherits from BaseModel """
 from models.base_model import BaseModel
 
 
 class Amenity(BaseModel):
-    """ Amenity class """
+    """ Define amenity subclass that inherits from BaseModel """
     name = ""
