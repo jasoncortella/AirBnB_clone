@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """ unittest for State class """
 
-
 import unittest
 from models.base_model import BaseModel
 from models.state import State
@@ -9,6 +8,7 @@ from datetime import datetime
 from time import sleep
 import models
 import os
+
 
 class test_state_instantiation(unittest.TestCase):
     """ define unittest for testing State """
