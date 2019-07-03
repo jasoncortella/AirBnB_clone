@@ -109,20 +109,19 @@ class test_file_storage_methods(unittest.TestCase):
         fid = "Place." + f.id
         gid = "Review." + g.id
         with open("file.json", "r") as myFile:
-             self.assertIn(aid, myFile.read())
+            self.assertIn(aid, myFile.read())
         with open("file.json", "r") as myFile:
-             self.assertIn(bid, myFile.read())
+            self.assertIn(bid, myFile.read())
         with open("file.json", "r") as myFile:
-             self.assertIn(cid, myFile.read())
+            self.assertIn(cid, myFile.read())
         with open("file.json", "r") as myFile:
-             self.assertIn(did, myFile.read())
+            self.assertIn(did, myFile.read())
         with open("file.json", "r") as myFile:
-             self.assertIn(eid, myFile.read())
+            self.assertIn(eid, myFile.read())
         with open("file.json", "r") as myFile:
-             self.assertIn(fid, myFile.read())
+            self.assertIn(fid, myFile.read())
         with open("file.json", "r") as myFile:
-             self.assertIn(gid, myFile.read())
-
+            self.assertIn(gid, myFile.read())
 
     def test_file_storage_reload(self):
         a = BaseModel()

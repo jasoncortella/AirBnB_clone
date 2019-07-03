@@ -100,17 +100,17 @@ class test_base_model_id(unittest.TestCase):
         self.assertNotEqual(a.created_at, b.created_at)
 
     def test_base_model_extra_kwargs(self):
-        a= BaseModel(id=12345, name="hello")
+        a = BaseModel(id=12345, name="hello")
         self.assertEqual(a.id, 12345)
         self.assertEqual(a.name, "hello")
 
     def test_base_model_invalid_created_at(self):
         with self.assertRaises(TypeError):
-            a= BaseModel(created_at=None)
+            a = BaseModel(created_at=None)
 
     def test_base_model_invalid_updated_at(self):
         with self.assertRaises(TypeError):
-            a= BaseModel(updated_at=None)
+            a = BaseModel(updated_at=None)
 
 
 class test_base_model_created_at_updated_at(unittest.TestCase):
@@ -172,6 +172,7 @@ class test_base_model_created_at_updated_at(unittest.TestCase):
         ident = a.id
         a.save()
         self.assertEqual(ident, a.id)
+
 
 class test_base_model_str_method(unittest.TestCase):
     """ define unittest for testing the __str__ method """
@@ -285,7 +286,6 @@ class test_base_model_save_method(unittest.TestCase):
 #            self.assertTrue(iid in myFile.read())
 
 # These two tests cause traceback, not sure why. Works fine in python3 mode
-
 
 
 if __name__ == '__main__':
