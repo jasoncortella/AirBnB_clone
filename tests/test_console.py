@@ -628,10 +628,79 @@ class test_console_count_command(unittest.TestCase):
     def tearDown(self):
         os.rename("temp.json", "file.json")
 
-#    def test_count_command(self):
-#        with patch("sys.stdout", new=StringIO()) as output:
-#            self.assertFalse(HBNBCommand().onecmd("create Review"))
-#        with patch("sys.stdout", new=StringIO()) as output:
-#            self.assertFalse(HBNBCommand().onecmd("Review.count()"))
-#        count = output.getvalue().strip()
-#        print(">>>>>>count = {}<<<<<<".format(count))
+    def test_count_command_BaseModel(self):
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("BaseModel.count()"))
+        count1 = output.getvalue().strip()
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("create BaseModel"))
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("BaseModel.count()"))
+        count2 = output.getvalue().strip()
+        self.assertEqual(int(count1), int(count2) - 1)
+
+    def test_count_command_User(self):
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("User.count()"))
+        count1 = output.getvalue().strip()
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("create User"))
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("User.count()"))
+        count2 = output.getvalue().strip()
+        self.assertEqual(int(count1), int(count2) - 1)
+
+    def test_count_command_State(self):
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("State.count()"))
+        count1 = output.getvalue().strip()
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("create State"))
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("State.count()"))
+        count2 = output.getvalue().strip()
+        self.assertEqual(int(count1), int(count2) - 1)
+
+    def test_count_command_City(self):
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("City.count()"))
+        count1 = output.getvalue().strip()
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("create City"))
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("City.count()"))
+        count2 = output.getvalue().strip()
+        self.assertEqual(int(count1), int(count2) - 1)
+
+    def test_count_command_Amenity(self):
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("Amenity.count()"))
+        count1 = output.getvalue().strip()
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("create Amenity"))
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("Amenity.count()"))
+        count2 = output.getvalue().strip()
+        self.assertEqual(int(count1), int(count2) - 1)
+
+    def test_count_command_Place(self):
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("Place.count()"))
+        count1 = output.getvalue().strip()
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("create Place"))
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("Place.count()"))
+        count2 = output.getvalue().strip()
+        self.assertEqual(int(count1), int(count2) - 1)
+
+    def test_count_command_Review(self):
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("Review.count()"))
+        count1 = output.getvalue().strip()
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("create Review"))
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("Review.count()"))
+        count2 = output.getvalue().strip()
+        self.assertEqual(int(count1), int(count2) - 1)
