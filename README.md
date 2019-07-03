@@ -2,7 +2,7 @@
 ##### Command Interpreter 
 ---
 #### Description
-##### The command interpreter will be used in subsequent AirBnb projects to manage objects in our classes. In this case, we want to be able to do the following:
+##### The command interpreter will be used in subsequent AirBnb projects to manage objects in our classes. This console will allow us to do the following:
   *  Create new objects
   *  Retrieve an object
   *  Do operations on an object
@@ -46,11 +46,11 @@ Command | Description
 `update <class> <id> <attribute name> "<attribute value>"` | Update an attribute of an instance
 `all` | Print all string representations of all instances
 `all <class>` | Print all string representations of all instances of a class 
-`<class>.all()` | See all
+`<class>.all()` | See `all`
 `<class>.count()` | Return number of instances of a class
-`<class>.show(<id>)` | See show
-`<class>.destroy(<id>)` | See destroy
-`<class>.update(<id>, <attribute name>, <attribute value>)` | See update
+`<class>.show(<id>)` | See `show`
+`<class>.destroy(<id>)` | See `destroy`
+`<class>.update(<id>, <attribute name>, <attribute value>)` | See `update`
 
 ###  Files
 
