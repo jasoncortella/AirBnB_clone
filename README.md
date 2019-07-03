@@ -1,24 +1,31 @@
 # AirBnb Clone - The Console
-##### Command Interpreter 
 ---
-#### Description
-##### The command interpreter will be used in subsequent AirBnb projects to manage objects in our classes. This console will allow us to do the following:
+### Description
+##### The command interpreter will be used in subsequent AirBnb projects to manage objects of our classes. This console will allow us to do the following:
   *  Create new objects
   *  Retrieve an object
   *  Do operations on an object
   *  Change and update object attributes
   *  Destroy an object
-#### Usage
+### Usage
 The console can be run in interactive and non-interactive mode.
-##### Non-Interactive Mode
+#### Non-Interactive Mode
 
 To run a command in non-interactive mode, echo the desired command and pipe it into the console like so:
 ``` 
 echo "<command>" | ./console.py 
 ```
-example:
+##### Examples (syntax)
 ```
 echo "create BaseModel" | ./console.py
+```
+
+``` 
+echo "all" | ./console.py
+```
+
+```
+echo "show BaseModel 1123-2312312-241214-213134" | ./console.py
 ```
 
 ##### Interactive Mode
@@ -29,12 +36,20 @@ To run in interactive mode:
 ```
 Then type the desired commands inside of the program.
 
-example:
+##### Examples (syntax)
 ```
 (hbnb) create BaseModel
 ```
 
-#### Commands
+```
+(hbhb) all
+```
+
+```
+(hbnhb) show BaseModel 1123-2312312-241214-213134"
+```
+
+### Commands
 
 Command | Description
 --- | --- 
@@ -51,6 +66,26 @@ Command | Description
 `<class>.show(<id>)` | See `show`
 `<class>.destroy(<id>)` | See `destroy`
 `<class>.update(<id>, <attribute name>, <attribute value>)` | See `update`
+
+##### Examples (output)
+
+```
+(hbnb) create User
+8cf6930e-da38-4ecb-887a-841d7de188cb
+```
+
+```
+(hbnb) show User 8cf6930e-da38-4ecb-887a-841d7de188cb
+[BaseModel] (8cf6930e-da38-4ecb-887a-841d7de188cb) {'id': '8cf6930e-da38-4ecb-887a-841d7de188cb', 'updated_at': datetime.datetime(2019, 7, 3, 22, 37, 53, 44113), 'created_at': datetime.datetime(2019, 7, 3, 22, 37, 53, 44069)}
+```
+
+```
+(hbnb) User.count()
+1
+```
+
+
+
 
 ###  Files
 
@@ -73,6 +108,6 @@ File Name | Description
 This project was created by
 * **Jason Cortella** - [GitHub - jasoncortella](https://github.com/jasoncortella) | [LinkedIn](https://www.linkedin.com/in/jcortella/) at [Holberton
 School](http://holbertonschool.com).
-* **Josef Goodyear** - [GitHub - JosefGoodyear](https://github.com/JosefGoodyear) | [LinkedIn](https://www.linkedin.com/in/josefgoodyear/) at [Holberton
+* **Josef Goodyear** - [GitHub - JosefGoodyear](https://github.com/josefgoodyear) | [LinkedIn](https://www.linkedin.com/in/josefgoodyear/) at [Holberton
 School](http://holbertonschool.com).
 
