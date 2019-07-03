@@ -148,8 +148,8 @@ class test_console_create_command(unittest.TestCase):
         self.assertIn("Review", output.getvalue().strip())
 
 
-class test_console_create_command(unittest.TestCase):
-    """ define unittest for testing the hbnb console create command """
+class test_console_show_command(unittest.TestCase):
+    """ define unittest for testing the hbnb show create command """
 
     def test_show_alone(self):
         check  = "** class name missing **"
@@ -241,4 +241,282 @@ class test_console_create_command(unittest.TestCase):
         check  = "** instance id missing **"
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("show Amenity"))
+
+class test_console_destroy_command(unittest.TestCase):
+    """ define unittest for testing the hbnb console destroy command """
+
+    def setUp(self):
+        os.rename("file.json", "temp.json")
+
+    def tearDown(self):
+        os.rename("temp.json", "file.json")
+
+    def test_destroy_only(self):
+        check = "** class name missing **"
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("destroy"))
+        self.assertEqual(check, output.getvalue().strip())
+
+    def test_destroy_invalid(self):
+        check = "** class doesn't exist **"
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("destroy invalid"))
+        self.assertEqual(check, output.getvalue().strip())
+
+    def test_destroy_BaseModel_no_id(self):
+        check = "** instance id missing **"
+        with patch("sys.stdout", new=StringIO()) as output:
+            command = "destroy BaseModel"
+            self.assertFalse(HBNBCommand().onecmd(command))
+        self.assertEqual(check, output.getvalue().strip())
+
+    def test_destroy_User_no_id(self):
+        check = "** instance id missing **"
+        with patch("sys.stdout", new=StringIO()) as output:
+            command = "destroy User"
+            self.assertFalse(HBNBCommand().onecmd(command))
+        self.assertEqual(check, output.getvalue().strip())
+
+    def test_destroy_State_no_id(self):
+        check = "** instance id missing **"
+        with patch("sys.stdout", new=StringIO()) as output:
+            command = "destroy State"
+            self.assertFalse(HBNBCommand().onecmd(command))
+        self.assertEqual(check, output.getvalue().strip())
+
+    def test_destroy_City_no_id(self):
+        check = "** instance id missing **"
+        with patch("sys.stdout", new=StringIO()) as output:
+            command = "destroy City"
+            self.assertFalse(HBNBCommand().onecmd(command))
+        self.assertEqual(check, output.getvalue().strip())
+
+    def test_destroy_Amenity_no_id(self):
+        check = "** instance id missing **"
+        with patch("sys.stdout", new=StringIO()) as output:
+            command = "destroy Amenity"
+            self.assertFalse(HBNBCommand().onecmd(command))
+        self.assertEqual(check, output.getvalue().strip())
+
+    def test_destroy_Place_no_id(self):
+        check = "** instance id missing **"
+        with patch("sys.stdout", new=StringIO()) as output:
+            command = "destroy Place"
+            self.assertFalse(HBNBCommand().onecmd(command))
+        self.assertEqual(check, output.getvalue().strip())
+
+    def test_destroy_Review_no_id(self):
+        check = "** instance id missing **"
+        with patch("sys.stdout", new=StringIO()) as output:
+            command = "destroy Review"
+            self.assertFalse(HBNBCommand().onecmd(command))
+        self.assertEqual(check, output.getvalue().strip())
+
+    def test_destroy_BaseModel_bad_id(self):
+        check = "** no instance found **"
+        with patch("sys.stdout", new=StringIO()) as output:
+            command = "destroy BaseModel bad_id"
+            self.assertFalse(HBNBCommand().onecmd(command))
+        self.assertEqual(check, output.getvalue().strip())
+
+    def test_destroy_User_bad_id(self):
+        check = "** no instance found **"
+        with patch("sys.stdout", new=StringIO()) as output:
+            command = "destroy User bad_id"
+            self.assertFalse(HBNBCommand().onecmd(command))
+        self.assertEqual(check, output.getvalue().strip())
+
+    def test_destroy_State_bad_id(self):
+        check = "** no instance found **"
+        with patch("sys.stdout", new=StringIO()) as output:
+            command = "destroy State bad_id"
+            self.assertFalse(HBNBCommand().onecmd(command))
+        self.assertEqual(check, output.getvalue().strip())
+
+    def test_destroy_City_bad_id(self):
+        check = "** no instance found **"
+        with patch("sys.stdout", new=StringIO()) as output:
+            command = "destroy City bad_id"
+            self.assertFalse(HBNBCommand().onecmd(command))
+        self.assertEqual(check, output.getvalue().strip())
+
+    def test_destroy_Amenity_bad_id(self):
+        check = "** no instance found **"
+        with patch("sys.stdout", new=StringIO()) as output:
+            command = "destroy Amenity bad_id"
+            self.assertFalse(HBNBCommand().onecmd(command))
+        self.assertEqual(check, output.getvalue().strip())
+
+    def test_destroy_Place_bad_id(self):
+        check = "** no instance found **"
+        with patch("sys.stdout", new=StringIO()) as output:
+            command = "destroy Place bad_id"
+            self.assertFalse(HBNBCommand().onecmd(command))
+        self.assertEqual(check, output.getvalue().strip())
+
+    def test_destroy_Review_bad_id(self):
+        check = "** no instance found **"
+        with patch("sys.stdout", new=StringIO()) as output:
+            command = "destroy Review bad_id"
+            self.assertFalse(HBNBCommand().onecmd(command))
+        self.assertEqual(check, output.getvalue().strip())
+
+    def test_destroy_BaseModel(self):
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("create BaseModel"))
+        iid = output.getvalue().strip()
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("all"))
+        self.assertIn(iid, output.getvalue().strip())
+        with patch("sys.stdout", new=StringIO()) as output:
+            command = "destroy BaseModel {}".format(iid)
+            self.assertFalse(HBNBCommand().onecmd(command))
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("all"))
+        self.assertNotIn(iid, output.getvalue().strip())
+
+    def test_destroy_User(self):
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("create User"))
+        iid = output.getvalue().strip()
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("all"))
+        self.assertIn(iid, output.getvalue().strip())
+        with patch("sys.stdout", new=StringIO()) as output:
+            command = "destroy User {}".format(iid)
+            self.assertFalse(HBNBCommand().onecmd(command))
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("all"))
+        self.assertNotIn(iid, output.getvalue().strip())
+
+    def test_destroy_State(self):
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("create State"))
+        iid = output.getvalue().strip()
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("all"))
+        self.assertIn(iid, output.getvalue().strip())
+        with patch("sys.stdout", new=StringIO()) as output:
+            command = "destroy State {}".format(iid)
+            self.assertFalse(HBNBCommand().onecmd(command))
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("all"))
+        self.assertNotIn(iid, output.getvalue().strip())
+
+    def test_destroy_City(self):
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("create City"))
+        iid = output.getvalue().strip()
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("all"))
+        self.assertIn(iid, output.getvalue().strip())
+        with patch("sys.stdout", new=StringIO()) as output:
+            command = "destroy City {}".format(iid)
+            self.assertFalse(HBNBCommand().onecmd(command))
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("all"))
+        self.assertNotIn(iid, output.getvalue().strip())
+
+    def test_destroy_Amenity(self):
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("create Amenity"))
+        iid = output.getvalue().strip()
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("all"))
+        self.assertIn(iid, output.getvalue().strip())
+        with patch("sys.stdout", new=StringIO()) as output:
+            command = "destroy Amenity {}".format(iid)
+            self.assertFalse(HBNBCommand().onecmd(command))
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("all"))
+        self.assertNotIn(iid, output.getvalue().strip())
+
+    def test_destroy_Place(self):
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("create Place"))
+        iid = output.getvalue().strip()
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("all"))
+        self.assertIn(iid, output.getvalue().strip())
+        with patch("sys.stdout", new=StringIO()) as output:
+            command = "destroy Place {}".format(iid)
+            self.assertFalse(HBNBCommand().onecmd(command))
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("all"))
+        self.assertNotIn(iid, output.getvalue().strip())
+
+    def test_destroy_Review(self):
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("create Review"))
+        iid = output.getvalue().strip()
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("all"))
+        self.assertIn(iid, output.getvalue().strip())
+        with patch("sys.stdout", new=StringIO()) as output:
+            command = "destroy Review {}".format(iid)
+            self.assertFalse(HBNBCommand().onecmd(command))
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("all"))
+        self.assertNotIn(iid, output.getvalue().strip())
+
+
+class test_console_destroy_command_second_syntax(unittest.TestCase):
+    """
+    define unittest for testing the hbnb console destroy command
+    uss the dot syntax
+    """
+
+    def setUp(self):
+        os.rename("file.json", "temp.json")
+
+    def tearDown(self):
+        os.rename("temp.json", "file.json")
+
+    def test_destroy_BaseModel_bad_id_2(self):
+        check = "** no instance found **"
+        with patch("sys.stdout", new=StringIO()) as output:
+            command = 'BaseModel.destroy("bad_id")'
+            self.assertFalse(HBNBCommand().onecmd(command))
+        self.assertEqual(check, output.getvalue().strip())
+
+    def test_destroy_User_bad_id_2(self):
+        check = "** no instance found **"
+        with patch("sys.stdout", new=StringIO()) as output:
+            command = 'User.destroy("bad_id")'
+            self.assertFalse(HBNBCommand().onecmd(command))
+        self.assertEqual(check, output.getvalue().strip())
+
+    def test_destroy_State_bad_id_2(self):
+        check = "** no instance found **"
+        with patch("sys.stdout", new=StringIO()) as output:
+            command = 'State.destroy("bad_id")'
+            self.assertFalse(HBNBCommand().onecmd(command))
+        self.assertEqual(check, output.getvalue().strip())
+
+    def test_destroy_City_bad_id_2(self):
+        check = "** no instance found **"
+        with patch("sys.stdout", new=StringIO()) as output:
+            command = 'City.destroy("bad_id")'
+            self.assertFalse(HBNBCommand().onecmd(command))
+        self.assertEqual(check, output.getvalue().strip())
+
+    def test_destroy_Amenity_bad_id_2(self):
+        check = "** no instance found **"
+        with patch("sys.stdout", new=StringIO()) as output:
+            command = 'Amenity.destroy("bad_id")'
+            self.assertFalse(HBNBCommand().onecmd(command))
+        self.assertEqual(check, output.getvalue().strip())
+
+    def test_destroy_Place_bad_id_2(self):
+        check = "** no instance found **"
+        with patch("sys.stdout", new=StringIO()) as output:
+            command = 'Place.destroy("bad_id")'
+            self.assertFalse(HBNBCommand().onecmd(command))
+        self.assertEqual(check, output.getvalue().strip())
+
+    def test_destroy_Review_bad_id_2(self):
+        check = "** no instance found **"
+        with patch("sys.stdout", new=StringIO()) as output:
+            command = 'Review.destroy("bad_id")'
+            self.assertFalse(HBNBCommand().onecmd(command))
         self.assertEqual(check, output.getvalue().strip())
