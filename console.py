@@ -144,7 +144,8 @@ class HBNBCommand(cmd.Cmd):
                 x = x[1:]
                 if '{' not in x and '}' not in x:
                     al = split(x)
-                    self.do_update('{} {} {} "{}"'.format(k, al[0], al[1], al[2]))
+                    self.do_update('{} {} {} "{}"'.format
+                                   (k, al[0], al[1], al[2]))
 
 
 if __name__ == '__main__':
