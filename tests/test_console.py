@@ -1504,3 +1504,22 @@ class test_console_update_command_second_syntax(unittest.TestCase):
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("all Review"))
         self.assertIn("'color': 'purple'", output.getvalue().strip())
+
+class test_console_exit_commands(unittest.TestCase):
+    """ define unittest for testing the hbnb console update command """
+
+    def setUp(self):
+        os.rename("file.json", "temp.json")
+
+    def tearDown(self):
+        os.rename("temp.json", "file.json")
+
+    def test_check_quit(self):
+        with patch("sys.stdout", new=StringIO()) as output:
+                self.assertTrue(HBNBCommand().onecmd("quit"))
+
+    def test_check_eof(self):
+        with patch("sys.stdout", new=StringIO()) as output:
+                self.assertTrue(HBNBCommand().onecmd("EOF"))
+
+
