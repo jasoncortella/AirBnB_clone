@@ -40,18 +40,18 @@ Command | Description
 --- | --- 
 `quit` | Exit the program
 `EOF` | Exit the program
-'create <class>' | Create an instance of a class
-'show <class> <id>' | Print the string representation of an instance of a class
-'destroy <class> <id>' | Delete instance of a class
-'update <class> <id> <attribute name> "<attribute value>"
-' | Update an attribute of an instance
-'all' | Print all string representations of all instances
-'all <class>' | Print all string representations of all instances of a class 
-'<class>.all()' | See all
-'<class>.count()' | Return number of instances of a class
-'<class>.show(<id>)' | See show
-'<class>.destroy(<id>)' | See destroy
-'<class>.update(<id>, <attribute name>, <attribute value>)' | See update
+`create <class>` | Create an instance of a class
+`show <class> <id>` | Print the string representation of an instance of a class
+`destroy <class> <id>` | Delete instance of a class
+`update <class> <id> <attribute name> "<attribute value>"
+` | Update an attribute of an instance
+`all` | Print all string representations of all instances
+`all <class>` | Print all string representations of all instances of a class 
+`<class>.all()` | See all
+`<class>.count()` | Return number of instances of a class
+`<class>.show(<id>)` | See show
+`<class>.destroy(<id>)` | See destroy
+`<class>.update(<id>, <attribute name>, <attribute value>)` | See update
 
 ###  Files
 
