@@ -43,8 +43,7 @@ Command | Description
 `create <class>` | Create an instance of a class
 `show <class> <id>` | Print the string representation of an instance of a class
 `destroy <class> <id>` | Delete instance of a class
-`update <class> <id> <attribute name> "<attribute value>"
-` | Update an attribute of an instance
+`update <class> <id> <attribute name> "<attribute value>"` | Update an attribute of an instance
 `all` | Print all string representations of all instances
 `all <class>` | Print all string representations of all instances of a class 
 `<class>.all()` | See all
@@ -58,24 +57,16 @@ Command | Description
 File Name | Description
 --- | ---
 `console.py` | Program for running the HBNB console
-
 `models/basemodel.py` | Defines the BaseModel class 
-
 `models/engine/file_storage.py` | Defines the FileStorage class, handles the database
-
 `models/user.py` | Defines the User class, subclass of BaseModel
-
 `models/city.py` | Defines the City  class, subclass of BaseModel
-
 `models/state.py` | Defines the User class, subclass of BaseModel
-
 `models/amenity.py` | Defines the Amenity class, subclass of BaseModel
-
 `models/review.py` | Defines the Review class, subclass of BaseModel
-
 `models/place.py` | defines the place class, subclass of basemodel
-
 `tests/` | the test directory contains all unittest files for each class, separated by class name
+
 ---
 
 ### About
