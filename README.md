@@ -1,15 +1,15 @@
 # AirBnb Clone - The Console
 ---
-### Description
+## Description
 ##### The command interpreter will be used in subsequent AirBnb projects to manage objects of our classes. This console will allow us to do the following:
   *  Create new objects
   *  Retrieve an object
   *  Do operations on an object
   *  Change and update object attributes
   *  Destroy an object
-### Usage
+## Usage
 The console can be run in interactive and non-interactive mode.
-#### Non-Interactive Mode
+### Non-Interactive Mode
 
 To run a command in non-interactive mode, echo the desired command and pipe it into the console like so:
 ``` 
@@ -28,15 +28,17 @@ echo "all" | ./console.py
 echo "show BaseModel 1123-2312312-241214-213134" | ./console.py
 ```
 
-##### Interactive Mode
+### Interactive Mode
 
 To run in interactive mode:
+
 ``` 
 ./console.py 
 ```
 Then type the desired commands inside of the program.
 
 ##### Examples (syntax)
+
 ```
 (hbnb) create BaseModel
 ```
@@ -49,7 +51,7 @@ Then type the desired commands inside of the program.
 (hbnhb) show BaseModel 1123-2312312-241214-213134"
 ```
 
-### Commands
+## Commands
 
 Command | Description
 --- | --- 
@@ -87,7 +89,7 @@ Command | Description
 
 
 
-###  Files
+## Files
 
 File Name | Description
 --- | ---
@@ -104,7 +106,7 @@ File Name | Description
 
 ---
 
-### About
+## About
 This project was created by
 * **Jason Cortella** - [GitHub - jasoncortella](https://github.com/jasoncortella) | [LinkedIn](https://www.linkedin.com/in/jcortella/) at [Holberton
 School](http://holbertonschool.com).
