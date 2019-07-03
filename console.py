@@ -33,14 +33,11 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def emptyline(self):
-        """ do nothing for an empty line """
+        """do nothing for an empty line """
         pass
 
     def do_create(self, arg):
-        """
-        Example usage - "create BaseModel"
-        create a new class instance, saves it to JSON,  and print its id
-        """
+        """create a new class instance, saves it to JSON, print its id"""
         if not arg:
             print("** class name missing **")
         elif arg not in HBNBCommand.__classes:
@@ -51,10 +48,7 @@ class HBNBCommand(cmd.Cmd):
             instance.save()
 
     def do_show(self, arg):
-        """
-        Example usage - "show BaseModel 121212"
-        show command to print the str representation of an instance
-        """
+        """show command to print the str representation of an instance"""
         arglist = split(arg)
         if len(arglist) > 1:
             iid = "{}.{}".format(arglist[0], arglist[1])
@@ -70,10 +64,7 @@ class HBNBCommand(cmd.Cmd):
             print(storage.all()[iid])
 
     def do_destroy(self, arg):
-        """
-        Example usage - "destroy BaseModel 121212"
-        destroy command to delete an instance based on class name and id
-        """
+        """destroy command to delete instance based on class name and id"""
         arglist = split(arg)
         if len(arglist) > 1:
             iid = "{}.{}".format(arglist[0], arglist[1])
@@ -90,12 +81,7 @@ class HBNBCommand(cmd.Cmd):
             storage.save()
 
     def do_all(self, arg):
-        """
-        Example usage 1 - "all"
-        Example usage 2 - "all BaseModel"
-        all command to print all string representations of instances
-            - Can decide whether or not to choose a single class
-        """
+        """all command to print all string representations of instances"""
         arglist = split(arg)
         if len(arglist) and arglist[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
@@ -109,12 +95,7 @@ class HBNBCommand(cmd.Cmd):
             print(plist)
 
     def do_update(self, arg):
-        """
-        Example usage - update BaseModel 1234 email "aibnb@holbertonschool.com"
-        Usage: update <class name> <id> <attribute name> "<attribute value>"
-        update command to update an instance based on the class name
-        and id by adding or updating attribute
-        """
+        """update command to update an instance based on the class name"""
         arglist = split(arg)
         if len(arglist) > 1:
             iid = "{}.{}".format(arglist[0], arglist[1])
@@ -135,11 +116,7 @@ class HBNBCommand(cmd.Cmd):
             storage.all()[iid].save()
 
     def default(self, arg):
-        """
-        Example usage 1 - <class name>.all()
-        Example usage 2 - <class name>.count()
-        method to define default behavior when "do" command syntax not used
-        """
+        """method to define default behavior when "do" syntax not used"""
         for k in self.__classes:
             if arg == (k + '.all()'):
                 self.do_all(k)
@@ -164,8 +141,10 @@ class HBNBCommand(cmd.Cmd):
                 end = arg.find(')')
                 x = arg[start:end]
                 x = x.replace(',', '')
-                al = split(x[1:])
-                self.do_update('{} {} {} "{}"'.format(k, al[0], al[1], al[2]))
+                x = x[1:]
+                if '{' not in x and '}' not in x:
+                    al = split(x)
+                    self.do_update('{} {} {} "{}"'.format(k, al[0], al[1], al[2]))
 
 
 if __name__ == '__main__':
