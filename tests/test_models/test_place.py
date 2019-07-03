@@ -14,6 +14,12 @@ import os
 class test_place_instantiation(unittest.TestCase):
     """ define unittest for testing the place class """
 
+    def setUp(self):
+        os.rename("file.json", "temp.json")
+
+    def tearDown(self):
+        os.rename("temp.json", "file.json")
+
     def test_place_instantiation(self):
         a = Place()
         self.assertIsInstance(a, Place)

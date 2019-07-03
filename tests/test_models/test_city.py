@@ -13,6 +13,12 @@ import os
 class test_city_instantiation(unittest.TestCase):
     """ define unittest for testing the city instance attribute """
 
+    def setUp(self):
+        os.rename("file.json", "temp.json")
+
+    def tearDown(self):
+        os.rename("temp.json", "file.json")
+
     def test_city_instantiation(self):
         a = City()
         self.assertIsInstance(a, City)

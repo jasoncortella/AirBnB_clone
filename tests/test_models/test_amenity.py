@@ -13,6 +13,12 @@ import os
 class test_amenity_instantiation(unittest.TestCase):
     """ define unittest for testing the instance attribute """
 
+    def setUp(self):
+        os.rename("file.json", "temp.json")
+
+    def tearDown(self):
+        os.rename("temp.json", "file.json")
+
     def test_amenity_instantiation(self):
         a = Amenity()
         self.assertIsInstance(a, Amenity)

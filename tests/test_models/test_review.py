@@ -13,6 +13,12 @@ import os
 class test_review_instantiation(unittest.TestCase):
     """ define unittest for testing the review class """
 
+    def setUp(self):
+        os.rename("file.json", "temp.json")
+
+    def tearDown(self):
+        os.rename("temp.json", "file.json")
+
     def test_review_instantiation(self):
         a = Review()
         self.assertIsInstance(a, Review)

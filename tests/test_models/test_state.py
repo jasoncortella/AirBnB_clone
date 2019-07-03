@@ -13,6 +13,12 @@ import os
 class test_state_instantiation(unittest.TestCase):
     """ define unittest for testing State """
 
+    def setUp(self):
+        os.rename("file.json", "temp.json")
+
+    def tearDown(self):
+        os.rename("temp.json", "file.json")
+
     def test_state_instantiation(self):
         a = State()
         self.assertIsInstance(a, State)

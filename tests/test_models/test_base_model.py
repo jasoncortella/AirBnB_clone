@@ -12,6 +12,12 @@ import os
 class test_base_model_instantiation(unittest.TestCase):
     """ define unittest for testing the id instance attribute """
 
+    def setUp(self):
+        os.rename("file.json", "temp.json")
+
+    def tearDown(self):
+        os.rename("temp.json", "file.json")
+
     def test_base_model_instantiation(self):
         a = BaseModel()
         self.assertIsInstance(a, BaseModel)
@@ -51,6 +57,12 @@ class test_base_model_instantiation(unittest.TestCase):
 
 class test_base_model_id(unittest.TestCase):
     """ define unittest for testing the id instance attribute """
+
+    def setUp(self):
+        os.rename("file.json", "temp.json")
+
+    def tearDown(self):
+        os.rename("temp.json", "file.json")
 
     def test_base_model_id_noarg(self):
         a = BaseModel()
@@ -103,6 +115,12 @@ class test_base_model_id(unittest.TestCase):
 
 class test_base_model_created_at_updated_at(unittest.TestCase):
     """ define unittest for testing the id instance attribute """
+
+    def setUp(self):
+        os.rename("file.json", "temp.json")
+
+    def tearDown(self):
+        os.rename("temp.json", "file.json")
 
     def test_created_at_instantiation(self):
         a = BaseModel()
@@ -158,6 +176,12 @@ class test_base_model_created_at_updated_at(unittest.TestCase):
 class test_base_model_str_method(unittest.TestCase):
     """ define unittest for testing the __str__ method """
 
+    def setUp(self):
+        os.rename("file.json", "temp.json")
+
+    def tearDown(self):
+        os.rename("temp.json", "file.json")
+
     def test_str(self):
         a = BaseModel()
         b = "[{}] ({}) {}".format(a.__class__.__name__, a.id, a.__dict__)
@@ -166,6 +190,12 @@ class test_base_model_str_method(unittest.TestCase):
 
 class test_base_model_to_dict_method(unittest.TestCase):
     """ define unittest for testing the to_dict method """
+
+    def setUp(self):
+        os.rename("file.json", "temp.json")
+
+    def tearDown(self):
+        os.rename("temp.json", "file.json")
 
     def test_to_dict_created_at(self):
         a = BaseModel()
@@ -232,7 +262,6 @@ class test_base_model_save_method(unittest.TestCase):
 
     def setUp(self):
         os.rename("file.json", "temp.json")
-
 
     def tearDown(self):
         os.rename("temp.json", "file.json")

@@ -19,6 +19,12 @@ import os
 class test_file_storage_instantiation(unittest.TestCase):
     """ define unit test for testing file storage instantiation tests """
 
+    def setUp(self):
+        os.rename("file.json", "temp.json")
+
+    def tearDown(self):
+        os.rename("temp.json", "file.json")
+
     def test_filestorage_instantiation(self):
         a = FileStorage()
         self.assertIsInstance(a, FileStorage)

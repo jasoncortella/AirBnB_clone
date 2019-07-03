@@ -13,6 +13,12 @@ import os
 class test_user_instantiation(unittest.TestCase):
     """ define unittest for testing the instance attribute """
 
+    def setUp(self):
+        os.rename("file.json", "temp.json")
+
+    def tearDown(self):
+        os.rename("temp.json", "file.json")
+
     def test_user_instantiation(self):
         a = User()
         self.assertIsInstance(a, User)
