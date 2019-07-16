@@ -37,6 +37,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-left: auto;
 }
 
 .information {
@@ -52,8 +53,6 @@
 .max_guest, .number_rooms, .number_bathrooms {
     width: 100px;
 }
-
-
 
 .group_img {
     margin: auto;
